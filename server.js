@@ -16,6 +16,6 @@ app.use('/announcements',announcementsRouter);
 
 //import
 const usersRouter = require('./routes/users');
-app.use('/user',announcementsRouter);
+app.use('/users',usersRouter);
 
 app.listen(3000, () => console.log("Server started ! "));
