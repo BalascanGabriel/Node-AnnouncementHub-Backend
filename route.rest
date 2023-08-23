@@ -1,0 +1,14 @@
+GET http://localhost:3000/announcements
+########
+GET http://localhost:3000/announcements/15
+########
+POST http://localhost:3000/announcements
+
+{
+    "title" : "Iphone 13",
+    "description" : "Stare perfecta",
+    "price": 3000,
+    "location" : "Slatina",
+    "category" : "Electronice",
+    "owner" : "Gabe"
+}
