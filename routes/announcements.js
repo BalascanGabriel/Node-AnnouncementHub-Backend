@@ -4,7 +4,7 @@ const Announcement = require('../models/announcement')
 
 
 //Get all announcements
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const announcements = await Announcement.find()
         res.json(announcements)
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-//Get one anncouncement
+//Get one anncouncement by id
 router.get('/:id', getAnnouncement, (req, res) => {
     const announcement = res.announcement
 
@@ -30,7 +30,7 @@ router.get('/:id', getAnnouncement, (req, res) => {
 })
 
 //Create an announcement
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
     console.log(req.body);
     const announcement = new Announcement({
         title: req.body.title,
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
 })
 
 //Delete an announcemnt
-router.delete('/:id', getAnnouncement, async (req, res) => {
+router.delete('/delete/:id', getAnnouncement, async (req, res) => {
     try {
         await res.announcement.deleteOne()
         res.json({ message: "Announcement deleted !" })
@@ -62,14 +62,13 @@ router.delete('/:id', getAnnouncement, async (req, res) => {
 })
 
 //Update an announcement
-router.patch('/:id', getAnnouncement, async (req, res) => {
+router.patch('/update/:id', getAnnouncement, async (req, res) => {
     try {
         const announcementToUpdate = res.announcement;
 
         console.log('Request Body:', req.body); // Log the request body
         console.log('Before Update:', announcementToUpdate);
 
-        // ... Your update logic ...
 
         // Update the announcement's properties based on the request body
         announcementToUpdate.title = req.body.title || announcementToUpdate.title;

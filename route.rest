@@ -1,8 +1,8 @@
-GET http://localhost:3000/announcements
+GET http://localhost:3000/announcements/all
 ########
 GET http://localhost:3000/announcements/64e5dd6cc6f236a1c483615a
 ########
-POST http://localhost:3000/announcements
+POST http://localhost:3000/announcements/new
 
 {
     "title" : "Iphone 13",
@@ -14,16 +14,16 @@ POST http://localhost:3000/announcements
 }
 
 ########
-DELETE http://localhost:3000/announcements/64e5dd4dc6f236a1c4836158
+DELETE http://localhost:3000/announcements/delete/64e5dd4dc6f236a1c4836158
 
 ########
 
-PATCH http://localhost:3000/announcements/64e5dd6cc6f236a1c483615a
+PATCH http://localhost:3000/announcements/update/64e5dd6cc6f236a1c483615a
 Content-Type: application/json
 
 {
     "title" : "Iphone 14",
-    "description" : "Stare acceptabile",
+    "description" : "Stare acceptabila",
     "price": 3550,
     "location" : "Slatina",
     "category" : "Electronice",
