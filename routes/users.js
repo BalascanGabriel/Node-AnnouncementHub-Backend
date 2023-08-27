@@ -2,6 +2,11 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 
+
+router.get('/register', (req,res)=>{
+    res.render('createuser')
+})
+
 //Get all users
 router.get('/all', async (req, res) => {
     try {
@@ -30,21 +35,17 @@ router.get('/:id', getUser, (req, res) => {
 router.post('/new', async (req, res) => {
     //logging the requested body
     console.log(req.body)
+    const { name, email, password } = req.body;
 
-    //Constructing the user
-    const user = new User({
-        name: req.body.name,
-        password: req.body.password,
-        email: req.body.email
-    })
+    const newUser = new User({
+        name,
+        email,
+        password
+    });
 
-    //saving the user in the db
-    try {
-        const newUser = await user.save()
-        res.status(201).json(newUser)
-    } catch (error) {
-        res.status(400).json({ message: error.message })
-    }
+    await newUser.save();
+
+    res.json({success : true})
 })
 
 //delete user

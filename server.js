@@ -13,16 +13,16 @@ db.once('open', () => console.log('Connected to the db'));
 
 app.use(express.json());
 
-app.get('/home', (req,res)=>{
+app.get('/', (req,res)=>{
     res.render('index')
 })
 
 //import announcements routes
 const announcementsRouter = require('./routes/announcements');
-app.use('/announcements',announcementsRouter);
+app.use('/api/announcements',announcementsRouter);
 
 //import user routes
 const usersRouter = require('./routes/users');
-app.use('/users',usersRouter);
+app.use('/api/users',usersRouter);
 
 app.listen(3000, () => console.log("Server started ! "));
