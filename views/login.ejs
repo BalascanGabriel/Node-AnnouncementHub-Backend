@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +17,7 @@
             min-height: 100vh;
         }
 
-        .registration-container {
+        .login-container {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -26,14 +26,14 @@
             text-align: center;
         }
 
-        .registration-form label {
+        .login-form label {
             display: block;
             text-align: left;
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
-        .registration-form input {
+        .login-form input {
             display: block;
             width: 100%;
             padding: 0.5rem;
@@ -43,7 +43,7 @@
             font-size: 14px;
         }
 
-        .registration-form button {
+        .login-form button {
             background-color: #007bff;
             color: white;
             border: none;
@@ -54,60 +54,31 @@
             transition: background-color 0.2s;
         }
 
-        .registration-form button:hover {
+        .login-form button:hover {
             background-color: #0056b3;
         }
 
-        .registration-form h2 {
+        .login-form h2 {
             margin-top: 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="registration-container">
-        <h2>Register User</h2>
-        <form action="http://localhost:3000/api/users/new" method="POST" id="usercreate" class="registration-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/api/users/login" method="POST" id="loginForm" class="login-form">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Create User</button>
+            <button type="submit">Login</button>
         </form>
     </div>
     <script>
-        const form = document.querySelector("#usercreate");
-        const name = document.querySelector("#name");
-        const email = document.querySelector("#email");
-        const password = document.querySelector("#password");
-        form.onsubmit = async (e) => {
-            e.preventDefault();
-            console.log(name.value, email.value, password.value);
-            let res = await fetch('http://localhost:3000/api/users/new', {
-                method: "POST",
-                mode: "cors",
-                cache: "no-cache",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: name.value,
-                    email: email.value,
-                    password: password.value
-                })
-            });
-            res = await res.json();
-            console.log(res);
-            if (res.success === true) {
-                alert(`Welcome to Announcement hub, ${name.value}`)
-                window.location.href = 'http://localhost:3000/';
-            }
-        };
+        
     </script>
 </body>
 

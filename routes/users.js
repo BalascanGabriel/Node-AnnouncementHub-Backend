@@ -3,9 +3,33 @@ const router = express.Router()
 const User = require('../models/user')
 
 
-router.get('/register', (req,res)=>{
+router.get('/register', (req, res) => {
     res.render('createuser')
 })
+
+router.get('/login', (req, res) => {
+    res.render('login')
+})
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Find the user by email
+        const user = await User.findOne({ email });
+
+        // Check if the user exists and the password matches
+        if (user && user.password === password) {
+            // Successful login
+            res.redirect('/'); // Redirect to the main page
+        } else {
+            // Invalid credentials
+            res.render('login', { error: 'Invalid email or password' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 //Get all users
 router.get('/all', async (req, res) => {
@@ -45,7 +69,7 @@ router.post('/new', async (req, res) => {
 
     await newUser.save();
 
-    res.json({success : true})
+    res.json({ success: true })
 })
 
 //delete user
@@ -60,9 +84,9 @@ router.delete('/delete/:id', getUser, async (req, res) => {
 
 //update user
 router.patch('/update/:id', getUser, async (req, res) => {
-    try{
+    try {
         const userToUpdate = res.user
-        console.log('Requested body' , req.body)
+        console.log('Requested body', req.body)
 
 
         //Update user
@@ -72,11 +96,11 @@ router.patch('/update/:id', getUser, async (req, res) => {
 
         //Save user
         const updatedUser = await userToUpdate.save()
-        res.json({message : "User updated ! ", updatedUser})
+        res.json({ message: "User updated ! ", updatedUser })
 
 
-    }catch(error){
-        res.status(500).json({message : error.message});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 })
 
