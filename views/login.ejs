@@ -78,7 +78,35 @@
         </form>
     </div>
     <script>
-        
+        // Update the form submission logic
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            console.log(email.value, password.value);
+            let res = await fetch('/api/users/login', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    password: password.value
+                })
+            });
+
+            const jsonResponse = await res.json();
+
+            if (res.status === 200 && jsonResponse.success) {
+                // Successful login
+                alert(jsonResponse.message); // Display the success message
+                window.location.href = '/'; // Redirect to the main page
+            } else {
+                // Invalid login
+                alert(jsonResponse.message); // Display the error message
+            }
+        };
+
     </script>
 </body>
 

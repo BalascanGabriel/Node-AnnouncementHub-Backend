@@ -21,15 +21,16 @@ router.post('/login', async (req, res) => {
         // Check if the user exists and the password matches
         if (user && user.password === password) {
             // Successful login
-            res.redirect('/'); // Redirect to the main page
+            res.status(200).json({ success: true, message: 'Login successful' });
         } else {
             // Invalid credentials
-            res.render('login', { error: 'Invalid email or password' });
+            res.status(401).json({ success: false, message: 'Invalid email or password' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 //Get all users
 router.get('/all', async (req, res) => {
