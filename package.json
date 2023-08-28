@@ -9,6 +9,7 @@
   "author": "Gabriel Balascan",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mongoose": "^7.4.4"

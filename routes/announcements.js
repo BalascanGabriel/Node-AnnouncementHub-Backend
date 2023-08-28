@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Announcement = require('../models/announcement')
 
+router.get('/new', (req, res) => {
+    res.render('createannouncement');
+});
+
 
 //Get all announcements
 router.get('/all', async (req, res) => {
@@ -28,6 +32,7 @@ router.get('/:id', getAnnouncement, (req, res) => {
 
     res.json(announcementInfo)
 })
+
 
 //Create an announcement
 router.post('/new', async (req, res) => {

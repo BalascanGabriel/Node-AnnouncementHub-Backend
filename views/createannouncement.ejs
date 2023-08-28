@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Announcement</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file -->
+
+    <style>
+        /* Reset default styles */
+        body,
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Set up basic styling */
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .announcement-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .create-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .create-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">Create New Announcement</h2>
+        <form action="/api/announcements/new" method="POST" class="announcement-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" class="input-field" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="input-field" required></textarea>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" class="input-field" required>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" class="input-field" required>
+
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" class="input-field" required>
+
+            <button type="submit" class="create-button">Create Announcement</button>
+        </form>
+    </div>
+    <script>
+        // JavaScript code to handle form submission
+        const announcementForm = document.getElementById('announcementForm');
+
+        announcementForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(announcementForm);
+            const response = await fetch('/api/announcements/new', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const newAnnouncement = await response.json();
+                console.log('New announcement created:', newAnnouncement);
+                // You can perform any necessary actions after successful submission
+            } else {
+                const errorData = await response.json();
+                console.error('Error creating announcement:', errorData.message);
+                // Handle the error, show an error message, etc.
+            }
+        });
+    </script>
+</body>
+
+</html>
