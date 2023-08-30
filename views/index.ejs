@@ -120,6 +120,17 @@
         #userDetails {
             float: left;
         }
+
+        .heart-button {
+            border: none;
+            background: none;
+            color: #ff0000;
+            /* Red color for the heart */
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+            /* Add margin to create space between buttons */
+        }
     </style>
 </head>
 
@@ -208,11 +219,25 @@
                         // For example, you can redirect to a details page for the announcement.
                     });
 
+                    const heartButton = document.createElement('button');
+                    heartButton.textContent = '❤️';
+                    heartButton.classList.add('heart-button');
+                    heartButton.addEventListener('click', () => {
+                       //LOGIC FOR THE HEART BUTTON
+                    });
+
+                    card.appendChild(detailsButton);
+
+
                     card.appendChild(title);
                     card.appendChild(description);
                     card.appendChild(price);
                     card.appendChild(location);
                     card.appendChild(detailsButton);
+                    //if logged in
+                    if (user) {
+                        card.appendChild(heartButton);
+                    }
 
                     announcementContainer.appendChild(card);
                 });
@@ -240,6 +265,7 @@
             if (user) {
                 const userId = user.id;
                 // Redirect to the user details page with the user ID as a query parameter
+                //tot ce e dupa ? e returnat e returnat in backend in req.query, d-aia dincolo e req.query.id ca ala de dupa ?
                 window.location.href = `/api/users/userDetails?id=${userId}`;
             }
         });
