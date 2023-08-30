@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
 
             if (passwordMatch) {
                 // Successful login
-                res.status(200).json({ success: true, message: `Login successful! Welcome back, ${user.name}`, user: {id : user._id ,name: user.name, email: user.email } });
+                res.status(200).json({ success: true, message: `Login successful! Welcome back, ${user.name}`, user: { id: user._id, name: user.name, email: user.email } });
             } else {
                 // Invalid credentials
                 res.status(401).json({ success: false, message: 'Invalid email or password' });
@@ -56,6 +56,22 @@ router.get('/all', async (req, res) => {
     }
 })
 
+router.get('/userDetails', async (req, res) => {
+    try {
+        const userId = req.query.id; // Get the user ID from the query parameter
+
+        // Fetch user details based on the user ID
+        const user = await User.findById(userId);
+
+        // Render the userDetails.ejs template and pass the user details to it
+        res.render('userDetails', { user });
+    } catch (error) {
+        console.error('Error fetching user details:', error);
+        res.status(500).json({ message: 'Error fetching user details' });
+    }
+});
+
+
 //Get one user by id
 router.get('/:id', getUser, (req, res) => {
 
@@ -69,6 +85,7 @@ router.get('/:id', getUser, (req, res) => {
 
     res.json(userInfo)
 })
+
 
 router.post('/new', async (req, res) => {
     const { name, email, password } = req.body;

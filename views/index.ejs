@@ -117,7 +117,7 @@
             padding: 1rem;
         }
 
-        #userDetails{
+        #userDetails {
             float: left;
         }
     </style>
@@ -133,7 +133,7 @@
                 <li id="login"><a href="/api/users/login">Login</a></li>
                 <li id="register"><a href="api/users/register">Register</a></li>
                 <li id="postAnnouncement"><a href="/api/announcements/new">Post Announcement</a></li>
-                <li id="myDetails"><a href="">My Details</a></li>
+                <li id="myDetails"><a href="#">My Details</a></li>
                 <li id="logout"><a href="">Logout</a></li>
             </ul>
         </nav>
@@ -231,6 +231,20 @@
             // Reload the page
             location.reload();
         });
+
+        myDetails.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            // Get the user ID from localStorage
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user) {
+                const userId = user.id;
+                // Redirect to the user details page with the user ID as a query parameter
+                window.location.href = `/api/users/userDetails?id=${userId}`;
+            }
+        });
+
+
     </script>
 </body>
 
