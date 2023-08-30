@@ -116,6 +116,10 @@
             text-align: center;
             padding: 1rem;
         }
+
+        #userDetails{
+            float: left;
+        }
     </style>
 </head>
 
@@ -128,7 +132,7 @@
                 <li><a href="/">All Announcements</a></li>
                 <li id="login"><a href="/api/users/login">Login</a></li>
                 <li id="register"><a href="api/users/register">Register</a></li>
-                <li><a href="/api/announcements/new">Post Announcement</a></li>
+                <li id="postAnnouncement"><a href="/api/announcements/new">Post Announcement</a></li>
                 <li id="myDetails"><a href="">My Details</a></li>
                 <li id="logout"><a href="">Logout</a></li>
             </ul>
@@ -149,13 +153,16 @@
         const userDetails = document.querySelector("#userDetails");
         const logout = document.querySelector("#logout");
         const myDetails = document.querySelector("#myDetails");
+        const postAnnouncement = document.querySelector("#postAnnouncement");
 
         userDetails.style.display = "none";
         logout.style.display = "none";
         myDetails.style.display = "none";
+        postAnnouncement.style.display = "none";
+
 
         let user = localStorage.getItem("user");
-        if(user){
+        if (user) {
             user = JSON.parse(user);
 
             login.style.display = "none";
@@ -164,6 +171,7 @@
             userDetails.style.display = "block";
             logout.style.display = "block";
             myDetails.style.display = "block";
+            postAnnouncement.style.display = "block";
 
         }
 
@@ -215,6 +223,14 @@
 
         // Call the function to fetch and display announcements
         fetchAnnouncements();
+
+        //LOGOUT BUTTON
+        logout.addEventListener("click", () => {
+            // Clear user data from local storage
+            localStorage.removeItem("user");
+            // Reload the page
+            location.reload();
+        });
     </script>
 </body>
 

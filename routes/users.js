@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
 
             if (passwordMatch) {
                 // Successful login
-                res.status(200).json({ success: true, message: 'Login successful', user: {id : user._id ,name: user.name, email: user.email } });
+                res.status(200).json({ success: true, message: `Login successful! Welcome back, ${user.name}`, user: {id : user._id ,name: user.name, email: user.email } });
             } else {
                 // Invalid credentials
                 res.status(401).json({ success: false, message: 'Invalid email or password' });
