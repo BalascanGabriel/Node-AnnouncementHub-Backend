@@ -82,6 +82,8 @@
     <div class="container">
         <h2 class="title">Create New Announcement</h2>
         <form action="/api/announcements/new" method="POST" class="announcement-form" id="announcementForm">
+            <input type="hidden" value="" name="user_id" id="userId">
+
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" class="input-field" required>
 
@@ -101,6 +103,15 @@
         </form>
     </div>
     <script>
+
+        const userId = document.querySelector("#userId");
+
+        let user = localStorage.getItem("user");
+        if (user) {
+            user = JSON.parse(user);
+            userId.value = user.id;
+
+        }
         // JavaScript code to handle form submission
         const announcementForm = document.getElementById('announcementForm');
 
@@ -114,9 +125,11 @@
             });
 
             if (response.ok) {
+                //announcement.owner
                 const newAnnouncement = await response.json();
                 console.log('New announcement created:', newAnnouncement);
                 // You can perform any necessary actions after successful submission
+
             } else {
                 const errorData = await response.json();
                 console.error('Error creating announcement:', errorData.message);

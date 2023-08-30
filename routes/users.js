@@ -26,10 +26,11 @@ router.post('/login', async (req, res) => {
         if (user) {
             const passwordMatch = await bcrypt.compare(password, user.password);
             console.log('Password match:', passwordMatch);
+            delete user.password;
 
             if (passwordMatch) {
                 // Successful login
-                res.status(200).json({ success: true, message: 'Login successful' });
+                res.status(200).json({ success: true, message: 'Login successful', user: {id : user._id ,name: user.name, email: user.email } });
             } else {
                 // Invalid credentials
                 res.status(401).json({ success: false, message: 'Invalid email or password' });

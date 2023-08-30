@@ -79,9 +79,14 @@
     </div>
     <script>
         // Update the form submission logic
+        const email = document.querySelector("#email");
+        const password = document.querySelector("#password");
+        const form = document.querySelector("#loginForm");
+
         form.onsubmit = async (e) => {
             e.preventDefault();
             console.log(email.value, password.value);
+
             let res = await fetch('/api/users/login', {
                 method: 'POST',
                 mode: 'cors',
@@ -100,7 +105,10 @@
             if (res.status === 200 && jsonResponse.success) {
                 // Successful login
                 alert(jsonResponse.message); // Display the success message
+                localStorage.setItem("user", JSON.stringify(jsonResponse.user));
+                localStorage.setItem("isLoggedIn", true);
                 window.location.href = '/'; // Redirect to the main page
+
             } else {
                 // Invalid login
                 alert(jsonResponse.message); // Display the error message
