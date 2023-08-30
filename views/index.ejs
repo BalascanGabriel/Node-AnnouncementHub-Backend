@@ -145,6 +145,7 @@
                 <li id="register"><a href="api/users/register">Register</a></li>
                 <li id="postAnnouncement"><a href="/api/announcements/new">Post Announcement</a></li>
                 <li id="myDetails"><a href="#">My Details</a></li>
+                <li id="favorites"><a href="#">Favorites</a></li>
                 <li id="logout"><a href="">Logout</a></li>
             </ul>
         </nav>
@@ -165,11 +166,13 @@
         const logout = document.querySelector("#logout");
         const myDetails = document.querySelector("#myDetails");
         const postAnnouncement = document.querySelector("#postAnnouncement");
+        const favorites = document.querySelector("#favorites");
 
         userDetails.style.display = "none";
         logout.style.display = "none";
         myDetails.style.display = "none";
         postAnnouncement.style.display = "none";
+        favorites.style.display = "none";
 
 
         let user = localStorage.getItem("user");
@@ -183,6 +186,7 @@
             logout.style.display = "block";
             myDetails.style.display = "block";
             postAnnouncement.style.display = "block";
+            favorites.style.display = "block";
 
         }
 
