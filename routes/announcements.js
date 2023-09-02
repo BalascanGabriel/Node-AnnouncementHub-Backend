@@ -44,7 +44,8 @@ router.post('/new', async (req, res) => {
         location: req.body.location,
         datePosted: Date(),
         category: req.body.category,
-        owner: req.body.owner
+        owner: req.body.owner,
+        ownerDetails: req.body.ownerDetails
     })
 
     try {

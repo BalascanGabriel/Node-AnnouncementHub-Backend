@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
 const announcementSchema = new mongoose.Schema({
     title: {
@@ -31,10 +32,8 @@ const announcementSchema = new mongoose.Schema({
         require: true,
         default: false
     },
-    owner: {
-        type: String,
-        require: true
-    }
+   
+    ownerDetails: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 
 module.exports = mongoose.model('Announcement', announcementSchema);

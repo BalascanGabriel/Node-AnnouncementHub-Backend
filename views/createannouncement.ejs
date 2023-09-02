@@ -81,8 +81,9 @@
 <body>
     <div class="container">
         <h2 class="title">Create New Announcement</h2>
-        <form action="/api/announcements/new" method="POST" class="announcement-form" id="announcementForm">
-            <input type="hidden" value="" name="user_id" id="userId">
+        <form class="announcement-form" id="announcementForm">
+
+            <input type="hidden" value="" name="ownerDetails" id="userId">
 
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" class="input-field" required>
@@ -118,10 +119,27 @@
         announcementForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formData = new FormData(announcementForm);
+            // const formData = new FormData(announcementForm);
+            const ann = {
+
+            };
+            const fieldsRegular = Array.prototype.slice.call(announcementForm.querySelectorAll('input[type|="text"], input[type|="number"], input[type|="hidden"]'));
+            const textAreaFields = Array.prototype.slice.call(announcementForm.querySelectorAll('textarea'))
+            
+            const fields = fieldsRegular.concat(textAreaFields);
+
+            for(const field of fields){
+                ann[field.getAttribute('name')] = field.value;
+            }
+            console.log('ann: ', ann);
+          
             const response = await fetch('/api/announcements/new', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ann)
             });
 
             if (response.ok) {
