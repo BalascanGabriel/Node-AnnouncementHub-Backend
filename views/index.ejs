@@ -72,66 +72,8 @@
         nav a:hover {
             color: #007bff;
         }
-
-        /* Announcements */
-        .announcement-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 2rem;
-            padding: 2rem;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        .announcement-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            transition: transform 0.2s;
-        }
-
-        .announcement-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .announcement-card h2 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .announcement-card p {
-            margin: 0.5rem 0;
-            color: #555;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        #userDetails {
-            float: left;
-        }
-
-        .heart-button {
-            border: none;
-            background: none;
-            color: #ff0000;
-            /* Red color for the heart */
-            cursor: pointer;
-            font-size: 1rem;
-            margin-left: 0.5rem;
-            /* Add margin to create space between buttons */
-        }
     </style>
+    <link rel="stylesheet" href="/css/card-style.css">
 </head>
 
 <body>
@@ -145,6 +87,7 @@
                 <li id="register"><a href="api/users/register">Register</a></li>
                 <li id="postAnnouncement"><a href="/api/announcements/new">Post Announcement</a></li>
                 <li id="myDetails"><a href="#">My Details</a></li>
+                <li id="myAnnouncements"><a href="/api/announcements/by-user-id-page /">My Announcements</a></li>
                 <li id="favorites"><a href="#">Favorites</a></li>
                 <li id="logout"><a href="">Logout</a></li>
             </ul>
@@ -167,10 +110,12 @@
         const myDetails = document.querySelector("#myDetails");
         const postAnnouncement = document.querySelector("#postAnnouncement");
         const favorites = document.querySelector("#favorites");
+        const myAnnouncements = document.querySelector("#myAnnouncements");
 
         userDetails.style.display = "none";
         logout.style.display = "none";
         myDetails.style.display = "none";
+        myAnnouncements.style.display = "none";
         postAnnouncement.style.display = "none";
         favorites.style.display = "none";
 
@@ -185,6 +130,7 @@
             userDetails.style.display = "block";
             logout.style.display = "block";
             myDetails.style.display = "block";
+            myAnnouncements.style.display = "block";
             postAnnouncement.style.display = "block";
             favorites.style.display = "block";
 
@@ -227,7 +173,7 @@
                     heartButton.textContent = '❤️';
                     heartButton.classList.add('heart-button');
                     heartButton.addEventListener('click', () => {
-                       //LOGIC FOR THE HEART BUTTON
+                        //LOGIC FOR THE HEART BUTTON
                     });
 
                     card.appendChild(detailsButton);
@@ -274,6 +220,17 @@
             }
         });
 
+        myAnnouncements.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            // Get the user ID from localStorage
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user) {
+                const userId = user.id;
+                // Redirect to the user announcements page with the user ID as a parameter
+                window.location.href = `/api/announcements/by-user-id-page/${userId}`;
+            }
+        });
 
     </script>
 </body>

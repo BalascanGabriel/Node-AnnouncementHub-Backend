@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 const Announcement = require('../models/announcement')
 
+const Schema = mongoose.Schema;
 router.get('/new', (req, res) => {
     res.render('createannouncement');
 });
@@ -55,7 +57,33 @@ router.post('/new', async (req, res) => {
     catch (error) {
         res.status(400).json({ message: error.message })
     }
-})
+});
+
+// Get all announcements for user - endpoint
+router.get('/by-user-id/:userId', async (req, res) => {
+    try {
+        console.log('USER ID: ', req.params.userId);
+        const announcements = await Announcement.find({'ownerDetails': new mongoose.Types.ObjectId(req.params.userId)})
+        res.json(announcements)
+    } catch (err) {
+        console.log('err: ', err);
+        res.status(500).json({ message: err.message })
+    }
+});
+
+// Get all announcements for user - page
+router.get('/by-user-id-page/:userId', async (req, res) => {
+    try {
+        console.log('USER ID: ', req.params.userId);
+        const announcements = await Announcement.find({'ownerDetails': new mongoose.Types.ObjectId(req.params.userId)})
+        res.render('userAnnouncements', {announcementsPage: announcements});
+        // res.json(announcements)
+    } catch (err) {
+        console.log('err: ', err);
+        // res.status(500).json({ message: err.message })
+    }
+});
+
 
 //Delete an announcemnt
 router.delete('/delete/:id', getAnnouncement, async (req, res) => {

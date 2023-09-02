@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 
 app.set('view engine', 'ejs')
-
+app.use(express.static('assets'))
 
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
@@ -16,6 +16,7 @@ app.use(express.json());
 app.get('/', (req,res)=>{
     res.render('index')
 })
+
 
 //import announcements routes
 const announcementsRouter = require('./routes/announcements');
