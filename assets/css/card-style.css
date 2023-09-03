@@ -17,6 +17,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 300px;
         transition: transform 0.2s;
+        margin : 5px;
     }
 
     .announcement-card:hover {

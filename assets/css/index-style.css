@@ -1,0 +1,125 @@
+/* Reset some default styles */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fonts */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Page layout */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+header {
+    background-color: #4A90E2;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navigation */
+nav {
+    background-color: #333;
+    padding: 1rem 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    margin: 0 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #4A90E2;
+}
+
+/* Stylish Card Design */
+.announcement-card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.announcement-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.announcement-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.announcement-card p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Button Styles */
+button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #357BBE;
+    transform: scale(1.05);
+}
+
+/* Heart Button (Favorite) */
+.heart-button {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.heart-button:hover {
+    transform: scale(1.2);
+    color: #FF4B4B;
+}
