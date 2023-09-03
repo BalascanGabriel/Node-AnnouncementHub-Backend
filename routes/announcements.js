@@ -19,6 +19,23 @@ router.get('/all', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    try {
+        // Fetch the announcement by ID
+        const announcement = await Announcement.findById(req.params.id)
+            .populate('ownerDetails'); // Populate ownerDetails field with user information
+
+        if (!announcement) {
+            return res.status(404).json({ message: 'Announcement not found' });
+        }
+
+        // Render the announcement details page with the announcement and owner information
+        res.render('announcement-details', { announcement });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 //Get one anncouncement by id
 router.get('/:id', getAnnouncement, (req, res) => {
     const announcement = res.announcement
@@ -63,7 +80,7 @@ router.post('/new', async (req, res) => {
 router.get('/by-user-id/:userId', async (req, res) => {
     try {
         console.log('USER ID: ', req.params.userId);
-        const announcements = await Announcement.find({'ownerDetails': new mongoose.Types.ObjectId(req.params.userId)})
+        const announcements = await Announcement.find({ 'ownerDetails': new mongoose.Types.ObjectId(req.params.userId) })
         res.json(announcements)
     } catch (err) {
         console.log('err: ', err);
@@ -75,8 +92,8 @@ router.get('/by-user-id/:userId', async (req, res) => {
 router.get('/by-user-id-page/:userId', async (req, res) => {
     try {
         console.log('USER ID: ', req.params.userId);
-        const announcements = await Announcement.find({'ownerDetails': new mongoose.Types.ObjectId(req.params.userId)})
-        res.render('userAnnouncements', {announcementsPage: announcements});
+        const announcements = await Announcement.find({ 'ownerDetails': new mongoose.Types.ObjectId(req.params.userId) })
+        res.render('userAnnouncements', { announcementsPage: announcements });
         // res.json(announcements)
     } catch (err) {
         console.log('err: ', err);

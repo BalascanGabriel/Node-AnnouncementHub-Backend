@@ -5,74 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Announcement HUB</title>
-    <style>
-        /* Reset some default styles */
-        body,
-        h1,
-        h2,
-        h3,
-        p,
-        ul,
-        li {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Fonts */
-        body {
-            font-family: 'Helvetica', Arial, sans-serif;
-        }
-
-        /* Page layout */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f1f1f1;
-            color: #333;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        main {
-            flex: 1;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: #444;
-            padding: 1rem 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav li {
-            margin: 0 1rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #007bff;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index-style.css">
     <link rel="stylesheet" href="/css/card-style.css">
 </head>
 
@@ -231,6 +164,24 @@
                 window.location.href = `/api/announcements/by-user-id-page/${userId}`;
             }
         });
+
+        /// Inside your existing JavaScript code
+        const detailsButtons = document.querySelectorAll('.details-button');
+
+        detailsButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Get the announcement ID from the data attribute or other source
+                const announcementId = button.getAttribute('data-announcement-id');
+
+                // Construct the URL for the announcement details page
+                const detailsPageUrl = `api/announcements/${announcementId}`; // Update to your actual URL structure
+
+                // Navigate to the announcement details page
+                window.location.href = detailsPageUrl;
+            });
+        });
+
+
 
     </script>
 </body>

@@ -5,95 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
-
-    <style>
-        /* Global styles */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-    
-        body {
-            display: flex;
-            flex-direction: column;
-            background-color: #f4f4f4;
-        }
-    
-        /* Header styles */
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: left;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-        }
-    
-        #go-back-button {
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-right: 2rem;
-            text-decoration: underline;
-        }
-    
-        #go-back-button:hover {
-            text-decoration: none;
-        }
-    
-        /* Main content styles */
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: #fff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            flex: 1; /* Add flex: 1 to main to make it fill the remaining space */
-        }
-    
-        .user-details-container {
-            text-align: center;
-            padding: 1rem;
-        }
-    
-        h1 {
-            color: #333;
-        }
-    
-        #name, #email {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-        }
-    
-        /* Edit button styles */
-        #edit-button {
-            display: inline-block;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-    
-        #edit-button:hover {
-            background-color: #555;
-        }
-    
-        /* Footer styles */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: auto; /* Push the footer to the bottom */
-        }
-    </style>
-    
+    <link rel="stylesheet" href="/css/user-details-style.css">
 </head>
 
 <body>
@@ -110,6 +22,65 @@
 
             <button id="edit-button">Edit my info</button>
 
+            <form id="edit-form" style="display: none">
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" name="name">
+                <br>
+                <label for="edit-email">Email:</label>
+                <input type="email" id="edit-email" name="email">
+                <br>
+                <button id="save-button">Save</button>
+            </form>
+
+            <script>
+                // Get references to the elements
+                const editButton = document.getElementById('edit-button');
+                const editForm = document.getElementById('edit-form');
+                const saveButton = document.getElementById('save-button');
+                const editNameInput = document.getElementById('edit-name');
+                const editEmailInput = document.getElementById('edit-email');
+
+                // Add an event listener to the "Edit my info" button
+                editButton.addEventListener('click', () => {
+                    // Toggle the visibility of the edit form
+                    editForm.style.display = 'block';
+                });
+
+                // Add an event listener to the "Save" button
+                saveButton.addEventListener('click', async () => {
+                    const updatedData = {
+                        name: editNameInput.value,
+                        email: editEmailInput.value,
+                    };
+
+                    userId = localStorage.getItem('id');
+
+                    try {
+                        // Make an AJAX request to your server to update the user info
+                        const response = await fetch(`/update/${userId}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(updatedData),
+                        });
+
+                        if (response.ok) {
+                            // Update the user details section with the new information
+                            const user = await response.json();
+                            document.getElementById('name').textContent = `Name: ${user.name}`;
+                            document.getElementById('email').textContent = `Email: ${user.email}`;
+
+                            // Hide the edit form again
+                            editForm.style.display = 'none';
+                        } else {
+                            console.error('Failed to update user:', response.statusText);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            </script>
 
         </div>
     </main>
