@@ -21,7 +21,7 @@
                 <li id="postAnnouncement"><a href="/api/announcements/new">Post Announcement</a></li>
                 <li id="myDetails"><a href="#">My Details</a></li>
                 <li id="myAnnouncements"><a href="/api/announcements/by-user-id-page /">My Announcements</a></li>
-                <li id="favorites"><a href="#">Favorites</a></li>
+                <li id="favorites"><a id="favorites" href="#">Favorites</a></li>
                 <li id="logout"><a href="">Logout</a></li>
             </ul>
         </nav>
@@ -105,8 +105,37 @@
                     const heartButton = document.createElement('button');
                     heartButton.textContent = '❤️';
                     heartButton.classList.add('heart-button');
-                    heartButton.addEventListener('click', () => {
-                        //LOGIC FOR THE HEART BUTTON
+                    heartButton.addEventListener('click', async () => {
+                        const user = JSON.parse(localStorage.getItem("user"));
+                        const userId = user.id;
+                        const announcementId = announcement._id;
+                        console.log(`User id : ${userId}, favorite announcement id ${announcementId}`);
+
+                        try {
+                            const response = await fetch('/api/favorites/add', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ userId, announcementId }),
+                            });
+                            if (response.ok) {
+                                // Successfully added to favorites
+                                // You can update the UI to reflect this, e.g., change the heart color
+                                heartButton.style.color = 'red';
+                                alert('Announcement added to favorites !')
+                            } else {
+                                const data = await response.json();
+                                console.error(data.message);
+                                // Handle the error, e.g., show an error message to the user
+                                alert(data.message);
+                            }
+                        } catch (error) {
+                            console.error(error);
+                            // Handle network or other errors
+                            alert(error);
+                        }
+
                     });
 
                     card.appendChild(detailsButton);
@@ -179,6 +208,22 @@
                 // Navigate to the announcement details page
                 window.location.href = detailsPageUrl;
             });
+        });
+
+        // JavaScript code to update the link and add an event listener
+        // JavaScript code to update the link and add an event listener
+        favorites.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default behavior of the anchor tag
+
+            const user = JSON.parse(localStorage.getItem("user"));
+            const userId = user.id;
+            const newUrl = `/api/favorites/${userId}`;
+
+            // Update the URL without causing a full page reload
+            window.history.pushState({}, '', newUrl);
+
+            // Manually trigger a navigation to the new URL
+            window.location.href = newUrl;
         });
 
 

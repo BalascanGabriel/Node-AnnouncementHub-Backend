@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Favorite = require('../models/favorite');
 const Announcement = require('../models/announcement');
+const User = require('../models/user'); // Import the User model
+
 
 // Add an announcement to favorites
 router.post('/add', async (req, res) => {
@@ -82,23 +84,22 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
-// Add this route to your Express application
-app.get('/favorites', async (req, res) => {
-    const userId = req.locals.userId; // Replace with your method of retrieving user ID from localStorage
+// router.get('/favorites', async (req, res) => {
+//     const userId = req.query.userId; // Extract user ID from query parameter
 
-    try {
-        // Fetch the user's favorite announcements
-        const favorites = await Favorite.find({ user: userId }).populate('announcement');
+//     try {
+//         // Fetch the user's favorite announcements using the userId
+//         const favorites = await Favorite.find({ user: userId }).populate('announcement');
 
-        // Extract announcement details from favorites
-        const favoriteAnnouncements = favorites.map((favorite) => favorite.announcement);
+//         // Extract announcement details from favorites
+//         const favoriteAnnouncements = favorites.map((favorite) => favorite.announcement);
 
-        res.render('favorites', { favoriteAnnouncements });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
+//         res.render('favorites', { favoriteAnnouncements });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
 
 
 module.exports = router;

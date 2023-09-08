@@ -13,7 +13,7 @@
         // JavaScript code to fetch and display favorite announcements
         async function fetchFavoriteAnnouncements() {
             try {
-                const response = await fetch('/api/favorites/user/:userId'); // Replace with the actual API endpoint to fetch favorites
+                const response = await fetch('/api/favorites/:userId'); // Replace with the actual API endpoint to fetch favorites
                 const data = await response.json();
 
                 const favoriteAnnouncements = document.getElementById('favoriteAnnouncements');
