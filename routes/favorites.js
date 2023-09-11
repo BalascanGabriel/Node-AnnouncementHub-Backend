@@ -59,30 +59,27 @@ router.delete('/remove', async (req, res) => {
 });
 
 // Get favorites for a specific user
+// In your server code (e.g., app.js or your Express router file)
+
+// Add this route to serve the favorites page
 router.get('/:userId', async (req, res) => {
+    const userId = req.params.userId; // Extract the user ID from the URL parameter
+
     try {
-        const userId = req.params.userId;
+        // Fetch the user's favorite announcements using the userId
+        const favorites = await Favorite.find({ user: userId }).populate('announcement');
 
-        // Find all favorites for the user
-        const favorites = await Favorite.find({ user: userId });
+        // Extract announcement details from favorites
+        const favoriteAnnouncements = favorites.map((favorite) => favorite.announcement);
 
-        // Create an array to store announcement details
-        const favoriteAnnouncements = [];
-
-        // Fetch announcement details for each favorite
-        for (const favorite of favorites) {
-            const announcement = await Announcement.findById(favorite.announcement);
-            if (announcement) {
-                favoriteAnnouncements.push(announcement);
-            }
-        }
-
-        return res.status(200).json(favoriteAnnouncements);
+        // Render the favorites view with the user's favorite announcements
+        res.render('favorites', { favoriteAnnouncements });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 // router.get('/favorites', async (req, res) => {
 //     const userId = req.query.userId; // Extract user ID from query parameter

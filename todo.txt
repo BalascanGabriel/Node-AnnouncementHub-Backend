@@ -2,8 +2,16 @@
 2)o pagina annoucement de details unde sa fie si detalii despre owner(nume, email)
 3)Merge un favorite/user
 4)Pagina user details cu edit
+
+nefacut
 5)ar merge si un message
 
 
 pt favorites inca o colectie cu userid si annid: inca un model inca niste rute si chestii
 la edit merge un form ca la register cu un save de update
+
+
+//Ar mai fi cool sa fie pe routes un backend cu /api care da jsoane
+//Si unu front doar cu rendere fara /api
+
+//Sau a zis mentoru ca pot sa ramana si asa !

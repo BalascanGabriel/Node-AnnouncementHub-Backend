@@ -27,7 +27,6 @@ const usersRouter = require('./routes/users');
 app.use('/api/users',usersRouter);
 
 //import favorites
-//import user routes
 const favoritesRouter = require('./routes/favorites');
 app.use('/api/favorites',favoritesRouter);
 
