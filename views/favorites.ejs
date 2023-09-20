@@ -1,39 +1,24 @@
+<!-- favorites.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ... (head content) ... -->
+<title>Your favorites</title>
+<link rel="stylesheet" href="/css/favorites-style.css">
 </head>
 <body>
+    <header>
+        <a href="/" id="go-back-button">&lt; Go back</a>
+    </header>
     <h1>Your Favorite Announcements</h1>
     <ul id="favoriteAnnouncements">
-        <!-- This list will be populated dynamically with JavaScript -->
+        <% favoriteAnnouncements.forEach((announcement) => { %>
+            <li>
+                <h2><%= announcement.title %></h2>
+                <p><%= announcement.description %></p>
+                <!-- Add other announcement details as needed -->
+            </li>
+        <% }); %>
     </ul>
-
-    <script>
-        // JavaScript code to fetch and display favorite announcements
-        async function fetchFavoriteAnnouncements() {
-            try {
-                const response = await fetch('/api/favorites/user/:userId'); // Replace with the actual API endpoint to fetch favorites
-                const data = await response.json();
-
-                const favoriteAnnouncements = document.getElementById('favoriteAnnouncements');
-
-                data.forEach((announcement) => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                        <h2>${announcement.title}</h2>
-                        <p>${announcement.description}</p>
-                        <!-- Add other announcement details as needed -->
-                    `;
-                    favoriteAnnouncements.appendChild(listItem);
-                });
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        // Call the fetch function when the page loads
-        window.addEventListener('load', fetchFavoriteAnnouncements);
-    </script>
 </body>
 </html>

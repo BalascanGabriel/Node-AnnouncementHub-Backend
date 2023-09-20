@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Favorite = require('../models/favorite');
 const Announcement = require('../models/announcement');
+const User = require('../models/user'); // Import the User model
+
 
 // Add an announcement to favorites
 router.post('/add', async (req, res) => {
@@ -57,48 +59,44 @@ router.delete('/remove', async (req, res) => {
 });
 
 // Get favorites for a specific user
+// In your server code (e.g., app.js or your Express router file)
+
+// Add this route to serve the favorites page
 router.get('/:userId', async (req, res) => {
-    try {
-        const userId = req.params.userId;
-
-        // Find all favorites for the user
-        const favorites = await Favorite.find({ user: userId });
-
-        // Create an array to store announcement details
-        const favoriteAnnouncements = [];
-
-        // Fetch announcement details for each favorite
-        for (const favorite of favorites) {
-            const announcement = await Announcement.findById(favorite.announcement);
-            if (announcement) {
-                favoriteAnnouncements.push(announcement);
-            }
-        }
-
-        return res.status(200).json(favoriteAnnouncements);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
-
-// Add this route to your Express application
-app.get('/favorites', async (req, res) => {
-    const userId = req.locals.userId; // Replace with your method of retrieving user ID from localStorage
+    const userId = req.params.userId; // Extract the user ID from the URL parameter
 
     try {
-        // Fetch the user's favorite announcements
+        // Fetch the user's favorite announcements using the userId
         const favorites = await Favorite.find({ user: userId }).populate('announcement');
 
         // Extract announcement details from favorites
         const favoriteAnnouncements = favorites.map((favorite) => favorite.announcement);
 
+        // Render the favorites view with the user's favorite announcements
         res.render('favorites', { favoriteAnnouncements });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
+// router.get('/favorites', async (req, res) => {
+//     const userId = req.query.userId; // Extract user ID from query parameter
+
+//     try {
+//         // Fetch the user's favorite announcements using the userId
+//         const favorites = await Favorite.find({ user: userId }).populate('announcement');
+
+//         // Extract announcement details from favorites
+//         const favoriteAnnouncements = favorites.map((favorite) => favorite.announcement);
+
+//         res.render('favorites', { favoriteAnnouncements });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
 
 
 module.exports = router;

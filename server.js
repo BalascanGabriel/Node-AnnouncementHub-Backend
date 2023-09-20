@@ -27,9 +27,8 @@ const usersRouter = require('./routes/users');
 app.use('/api/users',usersRouter);
 
 //import favorites
-//import user routes
-const usersRouter = require('./routes/favorites');
-app.use('/api/favorites',usersRouter);
+const favoritesRouter = require('./routes/favorites');
+app.use('/api/favorites',favoritesRouter);
 
 
 app.listen(3000, () => console.log("Server started ! "));
