@@ -4,18 +4,23 @@
   "description": "Initial rest project",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "start": "node server.js",
+    "test": "mocha tests/**/*.test.js"
   },
   "author": "Gabriel Balascan",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "chai": "^4.3.8",
+    "chai-http": "^4.4.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "mongoose": "^7.4.4"
+    "mongoose": "^7.5.0"
   },
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.1"
   }
 }
