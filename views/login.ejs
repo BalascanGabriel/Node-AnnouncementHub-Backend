@@ -5,22 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-  <link rel="stylesheet" href="/css/login-style.css">
+    <link rel="stylesheet" href="/css/login-style.css">
+    <link rel="stylesheet" href="/css/index-style.css">
+    <style>
+        /* Add these styles for layout */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="/api/users/login" method="POST" id="loginForm" class="login-form">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <header>
+        <h1 class="header-title">Announcement Hub</h1>
+        <nav>
+            <ul>
+                <li id="userDetails"></li>
+                <li><a href="/">Home</a></li>
+                <li id="login"><a href="/">Back</a></li>
+                
+                
+            </ul>
+        </nav>
+    </header>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+    <div class="content">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form action="/api/users/login" method="POST" id="loginForm" class="login-form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
 
-            <button type="submit">Login</button>
-        </form>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
+
+    <footer>
+        Powered by Balascan Gabriel
+    </footer>
+
     <script>
         // Update the form submission logic
         const email = document.querySelector("#email");

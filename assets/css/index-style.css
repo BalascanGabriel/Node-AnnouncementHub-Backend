@@ -21,31 +21,55 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    background-color: #f7f7f7;
-    color: #333;
-}
-
-header {
-    background-color: #4A90E2;
-    color: white;
-    text-align: center;
-    padding: 1rem;
+    background-color: #181818;
+    /* Dark background color */
+    color: #fff;
+    /* White text color */
 }
 
 main {
     flex: 1;
 }
 
-/* Navigation */
+/* Header Styles */
+header {
+    background: linear-gradient(to right, #FF5C00, #FF9354);
+    color: white;
+    padding: 1rem;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    /* Use flexbox */
+    justify-content: space-between;
+    /* Align items horizontally */
+    align-items: center;
+    /* Align items vertically */
+}
+
+
+.header-title {
+    font-size: 1.8rem;
+    /* Adjust the font size as needed (smaller) */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    margin-left: 10px;
+    /* Reduce left margin for a smaller width */
+    margin-right: 25px;
+}
+
+/* Navigation Styles */
 nav {
     background-color: #333;
     padding: 1rem 0;
+    flex-grow: 2;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    /* Allow items to wrap to the next line if needed */
+    justify-content: flex-start;
     padding: 0;
     margin: 0;
 }
@@ -58,53 +82,90 @@ nav a {
     text-decoration: none;
     color: white;
     font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
     transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #4A90E2;
+    color: #FF5C00;
 }
 
-/* Stylish Card Design */
-.announcement-card {
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+
+/* Product Card Styles */
+.product-card {
+    background-color: #333;
+    /* Dark background for product cards */
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+    /* Stronger box shadow */
     margin: 20px;
     padding: 20px;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Smooth card transition and box shadow change */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    /* Added for pseudo-element */
 }
 
-.announcement-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+/* Pseudo-element for diagonal striping */
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(-45deg,
+            transparent,
+            transparent 10px,
+            #FF9354 10px,
+            #FF9354 20px);
+    opacity: 0.1;
+    /* Opacity for subtle striping */
+    z-index: -1;
+    /* Place behind the card content */
 }
 
-.announcement-card h2 {
+.product-card:hover {
+    transform: translateY(-5px);
+    /* Slight upward lift on hover */
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.6);
+    /* Increased shadow on hover */
+}
+
+.product-card h2 {
     font-size: 1.8rem;
     margin-bottom: 10px;
-    color: #333;
+    color: #fff;
+    /* White text color */
 }
 
-.announcement-card p {
+.product-card p {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #555;
+    color: #ccc;
+    /* Light gray text color */
 }
 
 /* Button Styles */
 button {
-    background-color: #4A90E2;
+    background: linear-gradient(to right, #FF5C00, #FF9354);
+    /* Vibrant orange gradient button background */
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border-radius: 15px;
+    padding: 15px 30px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    transition: background 0.3s, transform 0.2s ease-in-out;
 }
 
 button:hover {
-    background-color: #357BBE;
+    background: linear-gradient(to right, #FF7E29, #FF5C00);
+    /* Gradient change on hover */
     transform: scale(1.05);
 }
 
@@ -112,14 +173,20 @@ button:hover {
 .heart-button {
     background-color: transparent;
     border: none;
-    color: red;
+    color: #FF5C00;
+    /* Vibrant orange heart color */
     font-size: 1.5rem;
     margin-top: 10px;
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, color 0.2s;
+    /* Add color transition */
 }
 
 .heart-button:hover {
     transform: scale(1.2);
-    color: #FF4B4B;
+    color: #FF7E29;
+    /* Brighter orange on hover */
 }
+
+/* Your existing styles */
+/* ... */

@@ -6,24 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link rel="stylesheet" href="/css/create-user-style.css">
+    <link rel="stylesheet" href="/css/index-style.css">
+    <style>
+        /* Add these styles for layout */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Center content vertically and horizontally */
+        }
+
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="registration-container">
-        <h2>Register User</h2>
-        <form action="http://localhost:3000/api/users/new" method="POST" id="usercreate" class="registration-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    <header>
+        <h1 class="header-title">Announcement Hub</h1>
+        <nav>
+            <ul>
+                <li id="userDetails"></li>
+                <li><a href="/">Home</a></li>
+                <li id="login"><a href="/">Back</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <div class="content">
+        <div class="registration-container">
+            <h2>Register User</h2>
+            <form action="http://localhost:3000/api/users/new" method="POST" id="usercreate" class="registration-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
 
-            <button type="submit">Create User</button>
-        </form>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Create User</button>
+            </form>
+        </div>
     </div>
+
+    <footer>
+        Powered by Balascan Gabriel
+    </footer>
+
     <script>
         const form = document.querySelector("#usercreate");
         const name = document.querySelector("#name");

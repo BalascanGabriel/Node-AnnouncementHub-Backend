@@ -1,67 +1,75 @@
- /* Reset default styles */
- body,
- h1,
- h2,
- h3,
- p,
- ul,
- li {
-     margin: 0;
-     padding: 0;
- }
+/* Reset default styles */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
 
- /* Set up basic styling */
- body {
-     font-family: 'Helvetica', Arial, sans-serif;
-     background-color: #f1f1f1;
-     color: #333;
- }
+/* Set up basic styling */
+body {
+    font-family: 'Arial', sans-serif; /* Change the font family */
+    background-color: #181818; /* Dark background color */
+    color: #fff; /* White text color */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
 
- .container {
-     max-width: 400px;
-     margin: 0 auto;
-     padding: 2rem;
-     background-color: white;
-     border-radius: 8px;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- }
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
- .title {
-     text-align: center;
-     margin-bottom: 1.5rem;
-     font-size: 1.5rem;
-     color: #333;
- }
+.title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #fff; /* White text color */
+}
 
- .announcement-form {
-     display: flex;
-     flex-direction: column;
- }
+.announcement-form {
+    display: flex;
+    flex-direction: column;
+}
 
- .label {
-     font-weight: bold;
-     margin-top: 1rem;
-     margin-bottom: 0.5rem;
- }
+.label {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: black; /* Adjust the label text color to a darker color */
+}
 
- .input-field {
-     padding: 0.5rem;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-     margin-bottom: 1rem;
- }
+.input-field {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 14px; /* Adjust font size */
+    color: #333; /* Adjust the input text color to a darker color */
+}
 
- .create-button {
-     background-color: #007bff;
-     color: white;
-     border: none;
-     border-radius: 4px;
-     padding: 0.5rem 1rem;
-     font-size: 16px;
-     cursor: pointer;
-     transition: background-color 0.2s;
- }
+.create-button {
+    background-color: #FF5C00; /* Adjust the button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
 
- .create-button:hover {
-     background-color: #0056b3;
- }
+.create-button:hover {
+    background-color: #FF7E29; /* Adjust the button hover color */
+}
