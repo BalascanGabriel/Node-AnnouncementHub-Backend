@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
-const userController = require('../controllers/usersController')
+const userControllerClass = require('../controllers/usersController')
+
+const userController = new userControllerClass()
 
 
 
