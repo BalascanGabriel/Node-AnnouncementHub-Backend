@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 app.set('view engine', 'ejs')
 app.use(express.static('assets'))
+app.use(express.static('public'))
 
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
